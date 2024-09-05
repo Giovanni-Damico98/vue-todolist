@@ -20,7 +20,25 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <main class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="fw-bold">Cose da fare:</h1>
+            <ul>
+              <li v-for="(todoItem, index) in todoList" :key="index">
+                {{ index }} -
+                <span
+                  :class="{ 'text-decoration-line-through': todoItem.done }"
+                >
+                  {{ todoItem.text }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
     <script src="js/script.js"></script>
   </body>
 </html>
