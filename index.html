@@ -42,37 +42,54 @@
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
       </head>
       <body>
-        <div id="app">
-          <main class="container">
+        <div id="app" class="w-100">
+          <main
+            class="container w-75 d-flex justify-content-center align-items-center"
+          >
             <div class="row">
               <div class="col-12">
                 <h1 class="fw-bold">Cose da fare:</h1>
                 <!-- Lista dei Todo -->
                 <ul>
-                  <li v-for="(todoItem, index) in todoList" :key="index">
-                    {{ index + 1 }} -
-                    <span
-                      :class="{ 'text-decoration-line-through': todoItem.done }"
+                  <li
+                    v-for="(todoItem, index) in todoList"
+                    :key="index"
+                    class="d-flex justify-content-between"
+                  >
+                    <div>
+                      {{ index + 1 }} -
+                      <span
+                        :class="{ 'text-decoration-line-through': todoItem.done }"
+                        @click="toggleDone(index)"
+                      >
+                        {{ todoItem.text }}
+                      </span>
+                    </div>
+                    <!-- Bottone per rimuovere il task -->
+                    <button
+                      class="btn btn-danger btn-sm"
+                      @click="removeTask(index)"
                     >
-                      {{ todoItem.text }}
-                    </span>
+                      X
+                    </button>
                   </li>
                 </ul>
 
                 <!-- Input per aggiungere nuovo task -->
-                <div class="input-group">
-                  <div class="form-floating mb-3">
+                <div class="input-group mt-3">
+                  <div class="form-floating mb-3 w-50">
                     <input
                       type="text"
-                      class="form-control w-50"
+                      class="form-control"
                       id="newTaskText"
                       v-model="newTaskText"
                       placeholder="Aggiungi un nuovo task"
+                      @keyup.enter="addTask"
                     />
                     <label for="newTaskText">Aggiungi compito</label>
                   </div>
                   <!-- Checkbox per lo stato completato o no -->
-                  <div class="form-check mb-3">
+                  <div class="form-check mb-3 ms-3">
                     <input
                       class="form-check-input"
                       type="checkbox"
